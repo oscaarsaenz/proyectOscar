@@ -1,4 +1,9 @@
 package com.example.proyectOscar.DTO.Ingles;
 
-public class InglesInputDTO {
+import java.io.Serializable;
+
+public class InglesInputDTO implements Serializable {
+    private String palabra;
+    private String palabraEspanol;
+
 }
