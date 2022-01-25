@@ -1,4 +1,8 @@
 package com.example.proyectOscar.DTO.Editorial;
 
-public class EditorialInputDTO {
+import java.io.Serializable;
+
+public class EditorialInputDTO implements Serializable {
+    private String nombre;
+    private int num_paginas;
 }
