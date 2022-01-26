@@ -1,5 +1,6 @@
 package com.example.proyectOscar.Modelo;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Ingles {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @NotNull
     @Column(name="id")
     private Integer id;
 

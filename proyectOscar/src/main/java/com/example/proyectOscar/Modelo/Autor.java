@@ -17,6 +17,7 @@ import java.util.List;
 public class Autor {
     @Id
     @NotNull
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Integer id;
 
@@ -27,7 +28,7 @@ public class Autor {
     @Column(name = "poblacion")
     private String poblacion;
 
-    //un autor puede trabajar para muchas editoriales
+    //un autor puede tener muchos diccionarios
     @OneToMany(mappedBy="autor", cascade = CascadeType.ALL)
-    private List<Editorial> Editoriales = new ArrayList<>();
+    private List<Espanol> diccionariosEspIngs = new ArrayList<>();
 }

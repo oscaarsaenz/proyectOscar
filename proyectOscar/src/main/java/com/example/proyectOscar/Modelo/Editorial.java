@@ -18,6 +18,7 @@ import java.util.List;
 public class Editorial {
     @Id
     @NotNull
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Integer id;
 
