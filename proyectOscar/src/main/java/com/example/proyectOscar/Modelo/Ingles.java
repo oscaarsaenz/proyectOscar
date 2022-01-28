@@ -4,6 +4,8 @@ import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,6 +35,9 @@ public class Ingles {
     @Column(name="activo")
     private boolean activo;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Espanol> palabrasEspanol= new ArrayList<>();
+    @OneToOne()
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "palabraEspanol")
+    private Espanol palabraEspanol;
+
 }

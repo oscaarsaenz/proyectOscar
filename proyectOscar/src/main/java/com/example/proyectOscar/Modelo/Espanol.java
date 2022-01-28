@@ -46,7 +46,5 @@ public class Espanol {
     @JoinColumn(name = "IdAutor")
     private Autor autor;
 
-    //un diccionario en español, tiene muchas palabras en ingles
-    @ManyToMany(mappedBy = "palabrasEspanol")
-    private List<Ingles> palabrasIngles = new ArrayList<>();
+
 }

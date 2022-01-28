@@ -7,4 +7,6 @@ import java.io.Serializable;
 public class EspanolInputDTO implements Serializable {
     private String palabra;
     private String Descripcion;
+    String nombreAutor;
+    String editorial;
 }

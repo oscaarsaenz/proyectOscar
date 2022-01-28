@@ -1,15 +1,16 @@
 package com.example.proyectOscar.services.Autor;
 
+import com.example.proyectOscar.DTO.Autor.AutorInputDTO;
+import com.example.proyectOscar.DTO.Autor.AutorOutputDTO;
+import com.example.proyectOscar.DTO.Autor.AutorSimpleOutputDTO;
 import com.example.proyectOscar.Modelo.Autor;
 
 import java.util.List;
 
 public interface AutorService {
-    public Autor buscarAutor(int id);
-    public Autor añadirAutor(Autor autor);
-    public List<Autor> getAutores();
-    public Boolean borrarAutor(int id);
-    public Autor buscAutor(String nombre);
-    public Boolean borrarAutorNombre(String nombre);
-    public Boolean actualizarAutor(Autor autor);
+    public AutorSimpleOutputDTO añadirAutor(AutorInputDTO autorInputDTO);
+    public List<AutorSimpleOutputDTO> getAutores();
+    public AutorSimpleOutputDTO buscAutor(String nombre);
+    public Boolean borrar(String nombre);
+    public AutorSimpleOutputDTO modificar(AutorInputDTO autor);
 }

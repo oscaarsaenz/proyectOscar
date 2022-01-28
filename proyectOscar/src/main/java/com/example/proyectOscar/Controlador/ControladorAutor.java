@@ -1,5 +1,7 @@
 package com.example.proyectOscar.Controlador;
 
+import com.example.proyectOscar.DTO.Autor.AutorInputDTO;
+import com.example.proyectOscar.DTO.Autor.AutorSimpleOutputDTO;
 import com.example.proyectOscar.Interfaces.AutorRepositorio;
 import com.example.proyectOscar.Modelo.Autor;
 import com.example.proyectOscar.services.Autor.AutorImplService;
@@ -12,53 +14,41 @@ import java.util.List;
 
 @Service
 @RestController
-@RequestMapping("crudAutor")
+@RequestMapping("autor")
 public class ControladorAutor {
 
     @Autowired
-    private AutorService as;
+    private AutorImplService as;
 
     //OPERACIONES CRUD AUTOR
 
-    //devuelve el autor con el id que le pases
-    @GetMapping("buscarAutor/{id}")
-    public Autor buscarAutor(@PathVariable int id) {
-        return as.buscarAutor(id);
-    }
-
     //añade un autor a la base de datos
-    @PostMapping("/añadirAutor")
-    public Autor anadirAutor(@RequestBody Autor a){
+    @PostMapping("/añadir")
+    public AutorSimpleOutputDTO anadirAutor(@RequestBody AutorInputDTO a){
         return as.añadirAutor(a);
     }
 
     //muestra todos los autores
     @GetMapping("/getAutores")
-    public List<Autor> getAutores(){
+    public List<AutorSimpleOutputDTO> getAutores(){
         return as.getAutores();
     }
 
     //elimina un autor
-    @DeleteMapping("/borrarAutor/{id}")
-    public Boolean borrarAutor(@PathVariable int id){
-        return as.borrarAutor(id);
+    @DeleteMapping("/borrar/{nombre}")
+    public Boolean borrarAutor(@PathVariable String nombre){
+        return as.borrar(nombre);
     }
 
     //busca un autor por nombre
     @GetMapping("/buscAutor/{nombre}")
-    public Autor buscAutor(@PathVariable String nombre){
+    public AutorSimpleOutputDTO buscAutor(@PathVariable String nombre){
         return as.buscAutor(nombre);
     }
 
-    //elimina un autor por nombre
-    @DeleteMapping("/borrarAutorNombre/{nombre}")
-    public Boolean borrarAutorNombre(@PathVariable String nombre){
-        return as.borrarAutorNombre(nombre);
-    }
-
     //modifica un autor
-    @PostMapping("actualizarAutor")
-    public Boolean actualiuzarAutor(@RequestBody Autor a){
-        return as.actualizarAutor(a);
+    @PostMapping("/modificar")
+    public AutorSimpleOutputDTO actualiuzarAutor(@RequestBody AutorInputDTO a){
+        return as.modificar(a);
     }
 }

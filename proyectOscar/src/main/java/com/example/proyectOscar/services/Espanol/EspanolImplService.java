@@ -3,6 +3,8 @@ package com.example.proyectOscar.services.Espanol;
 import com.example.proyectOscar.DTO.Espanol.EspanolInputDTO;
 import com.example.proyectOscar.DTO.Espanol.EspanolOutputDTO;
 import com.example.proyectOscar.DTO.Espanol.EspanolSimpleOutputDTO;
+import com.example.proyectOscar.Interfaces.AutorRepositorio;
+import com.example.proyectOscar.Interfaces.EditorialRepositorio;
 import com.example.proyectOscar.Interfaces.EspanolRepositorio;
 import com.example.proyectOscar.Modelo.Espanol;
 
@@ -16,10 +18,13 @@ import java.util.List;
 @Service
 public class EspanolImplService implements EspanolService {
     private EspanolRepositorio espanolRepositorio;
-
+    private AutorRepositorio autorRepositorio;
+    private EditorialRepositorio editorialRepositorio;
     @Autowired
-    public EspanolImplService(EspanolRepositorio espanolRepositorio){
+    public EspanolImplService(EspanolRepositorio espanolRepositorio, AutorRepositorio autorRepositorio, EditorialRepositorio editorialRepositorio){
         this.espanolRepositorio=espanolRepositorio;
+        this.autorRepositorio=autorRepositorio;
+        this.editorialRepositorio=editorialRepositorio;
     }
 
     //este metodo añadira una palabra a la base de datos
@@ -35,6 +40,8 @@ public class EspanolImplService implements EspanolService {
         esp.setPalabra(espanolInputDTO.getPalabra());
         esp.setDescripcion(espanolInputDTO.getDescripcion());
         esp.setFecha_alta(new Date());
+        esp.setAutor(autorRepositorio.findByName(espanolInputDTO.getNombreAutor()));
+        esp.setEditorial(editorialRepositorio.findByName(espanolInputDTO.getEditorial()));
         //lo guardo en la base de datos
         espanolRepositorio.save(esp);
         //devuelvo el objeto
@@ -43,6 +50,10 @@ public class EspanolImplService implements EspanolService {
 
     @Override
     public EspanolSimpleOutputDTO modificar(EspanolInputDTO espanolInputDTO) {
+        if(espanolRepositorio.findByName(espanolInputDTO.getPalabra())!=null){
+            this.borrar(espanolInputDTO.getPalabra());
+            return this.añadir(espanolInputDTO);
+        }
         return null;
     }
 
@@ -86,3 +97,4 @@ public class EspanolImplService implements EspanolService {
         return listaDevuelve;
     }
 }
+
