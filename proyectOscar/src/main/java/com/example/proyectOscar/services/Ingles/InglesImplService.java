@@ -23,6 +23,7 @@ public class InglesImplService implements InglesService{
         this.espanolRepositorio = espanolRepositorio;
     }
 
+    //añade una palabra en ingles
     @Override
     public InglesSimpleOutputDTO añadir(InglesInputDTO inglesInputDTO) {
         if(inglesRepositorio.findByName(inglesInputDTO.getPalabra())!=null){
@@ -41,6 +42,7 @@ public class InglesImplService implements InglesService{
         return devuelve;
     }
 
+    //consulta por la palabra
     @Override
     public InglesSimpleOutputDTO consultar(String palabra) {
         Ingles i = inglesRepositorio.findByName(palabra);
@@ -53,7 +55,7 @@ public class InglesImplService implements InglesService{
         iSDTO.setFechaModificacion(i.getFecha_modificacion());
         return iSDTO;
     }
-
+    //devuelve todas las palabras de la base de datos
     @Override
     public List<InglesSimpleOutputDTO> consultarTodos() {
         List<Ingles> lista = inglesRepositorio.findAll();
@@ -71,7 +73,7 @@ public class InglesImplService implements InglesService{
         }
         return listaDevuelve;
     }
-
+    //borra una palabra
     @Override
     public Boolean borrar(String palabra) {
         if(inglesRepositorio.findByName(palabra)!=null){
@@ -80,11 +82,12 @@ public class InglesImplService implements InglesService{
         }
         return false;
     }
-
+    //modifica una palabra
     @Override
     public InglesSimpleOutputDTO modificar(InglesInputDTO inglesInputDTO) {
         if(inglesRepositorio.findByName(inglesInputDTO.getPalabra())!=null){
             this.borrar(inglesInputDTO.getPalabra());
+            inglesRepositorio.findByName(inglesInputDTO.getPalabra()).getId();
             return this.añadir(inglesInputDTO);
         }
         return null;

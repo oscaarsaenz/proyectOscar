@@ -21,6 +21,7 @@ public class AutorImplService implements AutorService {
         this.autorRepositorio=autorRepositorio;
     }
 
+    //metodo que añade el autor que le pasas a la base de datos
     @Override
     public AutorSimpleOutputDTO añadirAutor(AutorInputDTO autorInputDTO) {
         Autor au = new Autor();
@@ -32,7 +33,7 @@ public class AutorImplService implements AutorService {
         devuelve.setPais(autorInputDTO.getPais());
         return devuelve;
     }
-
+    //devuelve todos los autores que tenga en la base de datos
     @Override
     public List<AutorSimpleOutputDTO> getAutores() {
         List<Autor>autorLista = autorRepositorio.findAll();
@@ -47,7 +48,7 @@ public class AutorImplService implements AutorService {
         }
         return devuelve;
     }
-
+    //busca un autor por nombre en la base de datos y lo devuelve
     @Override
     public AutorSimpleOutputDTO buscAutor(String nombre) {
         Autor au = autorRepositorio.findByName(nombre);
@@ -57,7 +58,7 @@ public class AutorImplService implements AutorService {
         auSimDTO.setPais(au.getPais());
         return auSimDTO;
     }
-
+    //borra el autor con el nombre que le pases
     @Override
     public Boolean borrar(String nombre) {
         Autor a = autorRepositorio.findByName(nombre);
@@ -67,7 +68,7 @@ public class AutorImplService implements AutorService {
         }
         return false;
     }
-
+    //metodo para modificar
     @Override
     public AutorSimpleOutputDTO modificar(AutorInputDTO autorInputDTO) {
         if(autorRepositorio.findByName(autorInputDTO.getNombre())!=null){
@@ -75,6 +76,5 @@ public class AutorImplService implements AutorService {
             return this.añadirAutor(autorInputDTO);
         }
         return null;
-
     }
 }

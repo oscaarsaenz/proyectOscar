@@ -30,24 +30,27 @@ public class EspanolImplService implements EspanolService {
     //este metodo añadira una palabra a la base de datos
     @Override
     public EspanolSimpleOutputDTO añadir(EspanolInputDTO espanolInputDTO) {
-        //creo el objeto a devolver
-        EspanolSimpleOutputDTO devuelve = new EspanolSimpleOutputDTO();
-        //le meto los datos
-        devuelve.setPalabra(espanolInputDTO.getPalabra());
-        devuelve.setDescripcion(espanolInputDTO.getDescripcion());
-        //creo el objeto para meter en la base de datos
-        Espanol esp = new Espanol();
-        esp.setPalabra(espanolInputDTO.getPalabra());
-        esp.setDescripcion(espanolInputDTO.getDescripcion());
-        esp.setFecha_alta(new Date());
-        esp.setAutor(autorRepositorio.findByName(espanolInputDTO.getNombreAutor()));
-        esp.setEditorial(editorialRepositorio.findByName(espanolInputDTO.getEditorial()));
-        //lo guardo en la base de datos
-        espanolRepositorio.save(esp);
-        //devuelvo el objeto
-        return devuelve;
+        if (espanolRepositorio.findByName(espanolInputDTO.getPalabra())==null){
+            //creo el objeto a devolver
+            EspanolSimpleOutputDTO devuelve = new EspanolSimpleOutputDTO();
+            //le meto los datos
+            devuelve.setPalabra(espanolInputDTO.getPalabra());
+            devuelve.setDescripcion(espanolInputDTO.getDescripcion());
+            //creo el objeto para meter en la base de datos
+            Espanol esp = new Espanol();
+            esp.setPalabra(espanolInputDTO.getPalabra());
+            esp.setDescripcion(espanolInputDTO.getDescripcion());
+            esp.setFecha_alta(new Date());
+            esp.setAutor(autorRepositorio.findByName(espanolInputDTO.getNombreAutor()));
+            esp.setEditorial(editorialRepositorio.findByName(espanolInputDTO.getEditorial()));
+            //lo guardo en la base de datos
+            espanolRepositorio.save(esp);
+            //devuelvo el objeto
+            return devuelve;
+        }
+        return null;
     }
-
+    //metodo que mofica la palabra
     @Override
     public EspanolSimpleOutputDTO modificar(EspanolInputDTO espanolInputDTO) {
         if(espanolRepositorio.findByName(espanolInputDTO.getPalabra())!=null){
@@ -56,7 +59,7 @@ public class EspanolImplService implements EspanolService {
         }
         return null;
     }
-
+    //metodo para borrar la palabra que le pasas
     @Override
     public void borrar(String palabra) {
         if(espanolRepositorio.findByName(palabra)!=null){
@@ -64,7 +67,7 @@ public class EspanolImplService implements EspanolService {
             espanolRepositorio.delete(e);
         }
     }
-
+    //devuelve la palabra que le pasas
     @Override
     public EspanolOutputDTO consultar(String palabra) {
         if(espanolRepositorio.findByName(palabra)!=null){
@@ -79,7 +82,7 @@ public class EspanolImplService implements EspanolService {
         }
         return null;
     }
-
+    //devuelve todas las palabras de la base de datos
     @Override
     public List<EspanolSimpleOutputDTO> consultarTodo() {
         List<EspanolSimpleOutputDTO> listaDevuelve = new ArrayList<>();

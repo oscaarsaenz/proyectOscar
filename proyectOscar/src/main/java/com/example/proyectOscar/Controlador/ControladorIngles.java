@@ -21,18 +21,22 @@ public class ControladorIngles {
     public InglesSimpleOutputDTO añadir(@RequestBody InglesInputDTO inglesInputDTO){
         return inglesImplService.añadir(inglesInputDTO);
     }
+
     @GetMapping("/consultar/{palabra}")
     public InglesSimpleOutputDTO consultar(@PathVariable String palabra){
         return inglesImplService.consultar(palabra);
     }
+
     @GetMapping("/consultarTodos")
     public List<InglesSimpleOutputDTO> consultarTodos(){
         return inglesImplService.consultarTodos();
     }
+
     @DeleteMapping("/borrar/{palabra}")
     public Boolean borrar(@PathVariable String palabra){
         return inglesImplService.borrar(palabra);
     }
+
     @PostMapping("/modificar")
     public InglesSimpleOutputDTO modificar(@RequestBody InglesInputDTO inglesInputDTO){
         return inglesImplService.modificar(inglesInputDTO);
