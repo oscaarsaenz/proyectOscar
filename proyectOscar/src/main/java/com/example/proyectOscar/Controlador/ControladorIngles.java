@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("ingles")
 public class ControladorIngles {
     @Autowired

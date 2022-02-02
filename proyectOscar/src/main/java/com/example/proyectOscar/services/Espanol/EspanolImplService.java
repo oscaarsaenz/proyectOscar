@@ -22,9 +22,9 @@ public class EspanolImplService implements EspanolService {
     private EditorialRepositorio editorialRepositorio;
     @Autowired
     public EspanolImplService(EspanolRepositorio espanolRepositorio, AutorRepositorio autorRepositorio, EditorialRepositorio editorialRepositorio){
-        this.espanolRepositorio=espanolRepositorio;
-        this.autorRepositorio=autorRepositorio;
-        this.editorialRepositorio=editorialRepositorio;
+        this.espanolRepositorio = espanolRepositorio;
+        this.autorRepositorio = autorRepositorio;
+        this.editorialRepositorio = editorialRepositorio;
     }
 
     //este metodo añadira una palabra a la base de datos
@@ -50,6 +50,7 @@ public class EspanolImplService implements EspanolService {
         }
         return null;
     }
+
     //metodo que mofica la palabra
     @Override
     public EspanolSimpleOutputDTO modificar(EspanolInputDTO espanolInputDTO) {
@@ -59,6 +60,7 @@ public class EspanolImplService implements EspanolService {
         }
         return null;
     }
+
     //metodo para borrar la palabra que le pasas
     @Override
     public void borrar(String palabra) {
@@ -67,6 +69,7 @@ public class EspanolImplService implements EspanolService {
             espanolRepositorio.delete(e);
         }
     }
+
     //devuelve la palabra que le pasas
     @Override
     public EspanolOutputDTO consultar(String palabra) {
@@ -82,6 +85,7 @@ public class EspanolImplService implements EspanolService {
         }
         return null;
     }
+
     //devuelve todas las palabras de la base de datos
     @Override
     public List<EspanolSimpleOutputDTO> consultarTodo() {
@@ -100,4 +104,3 @@ public class EspanolImplService implements EspanolService {
         return listaDevuelve;
     }
 }
-

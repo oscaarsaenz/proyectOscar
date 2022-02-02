@@ -36,6 +36,7 @@ public class Espanol {
     @Column(name="activo")
     private boolean activo;
 
+
     //un diccionario es de una editorial
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdEditorial")
@@ -45,6 +46,4 @@ public class Espanol {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "IdAutor")
     private Autor autor;
-
-
 }
