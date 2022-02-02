@@ -61,9 +61,8 @@ public class InglesImplService implements InglesService{
         List<Ingles> lista = inglesRepositorio.findAll();
 
         List<InglesSimpleOutputDTO> listaDevuelve = null;
-        //for (int a = 0; a < lista.size(); a++) {
+
         for (Ingles  i:lista) {
-            //Ingles i = lista.get(a);
             InglesSimpleOutputDTO iSDTO = new InglesSimpleOutputDTO();
             listaDevuelve = new ArrayList<>();
             iSDTO.setId(i.getId());

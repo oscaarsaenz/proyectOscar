@@ -39,8 +39,8 @@ public class AutorImplService implements AutorService {
     public List<AutorSimpleOutputDTO> getAutores() {
         List<Autor>autorLista = autorRepositorio.findAll();
         List<AutorSimpleOutputDTO> devuelve = new ArrayList<>();
-        for(int a=0; a<autorLista.size();a++){
-            Autor aut = autorLista.get(a);
+
+          for (Autor aut:autorLista){
             AutorSimpleOutputDTO auSimDTO = new AutorSimpleOutputDTO();
             auSimDTO.setId(aut.getId());
             auSimDTO.setNombre(aut.getNombre());

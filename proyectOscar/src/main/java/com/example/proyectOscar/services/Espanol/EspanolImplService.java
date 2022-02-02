@@ -92,8 +92,8 @@ public class EspanolImplService implements EspanolService {
         List<EspanolSimpleOutputDTO> listaDevuelve = new ArrayList<>();
 
         List <Espanol> l = espanolRepositorio.findAll();
-        for (int a =0;a<l.size();a++){
-            Espanol e = l.get(a);
+
+        for (Espanol e:l){
             EspanolSimpleOutputDTO devuelve = new EspanolSimpleOutputDTO();
             devuelve.setId(e.getId());
             devuelve.setPalabra(e.getPalabra());

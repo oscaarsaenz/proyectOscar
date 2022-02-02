@@ -8,6 +8,7 @@ import com.example.proyectOscar.Modelo.Editorial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -62,6 +63,17 @@ public class EditorialImplService implements EditorialService {
 
     @Override
     public List<EditorialSimpleOutputDTO> consultarTodo() {
-        return null;
+        List <Editorial> lista = editorialRepositorio.findAll();
+        List <EditorialSimpleOutputDTO> listaDevuelve = new ArrayList();
+
+        for(Editorial e:lista){
+            EditorialSimpleOutputDTO editorialDTO = new EditorialSimpleOutputDTO();
+            editorialDTO.setNombre(e.getNombre());
+            editorialDTO.setId(e.getId());
+            editorialDTO.setNum_paginas(e.getNumero_paginas());
+            editorialDTO.setFecha_publicacion(e.getFecha_publicacion());
+            listaDevuelve.add(editorialDTO);
+        }
+        return listaDevuelve;
     }
 }
